@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PList2021", "PList2021\PList2021.csproj", "{AC18C76C-730C-41C1-BFDC-83733D0976AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PList2021.Perf", "PList2021.Perf\PList2021.Perf.csproj", "{A6B08549-364E-4D17-96AD-915FD2E0959B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC18C76C-730C-41C1-BFDC-83733D0976AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC18C76C-730C-41C1-BFDC-83733D0976AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC18C76C-730C-41C1-BFDC-83733D0976AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC18C76C-730C-41C1-BFDC-83733D0976AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6B08549-364E-4D17-96AD-915FD2E0959B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6B08549-364E-4D17-96AD-915FD2E0959B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6B08549-364E-4D17-96AD-915FD2E0959B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6B08549-364E-4D17-96AD-915FD2E0959B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
