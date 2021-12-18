@@ -230,7 +230,7 @@ namespace PList2021
                     var indicesArrayByteSize = (int) count * plistTrailer.m_objectRefSize;
                     var keyIndicesSpan = nodeSpan.Slice(0, indicesArrayByteSize);
 
-                    var outputArray = new object[count];
+                    var outputArray = new object?[count];
 
                     for (var j = 0; j < (int) count; j++)
                     {
@@ -250,7 +250,7 @@ namespace PList2021
                     var keyIndicesSpan = nodeSpan.Slice(0, indicesArrayByteSize);
                     var valueIndicesSpan = nodeSpan.Slice(indicesArrayByteSize, indicesArrayByteSize);
 
-                    var outputDict = new Dictionary<string, object>((int)count);
+                    var outputDict = new Dictionary<string, object?>((int)count);
                     
                     for (var j = 0; j < (int)count; j++)
                     {
