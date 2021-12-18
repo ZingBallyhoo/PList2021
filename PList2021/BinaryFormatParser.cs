@@ -37,6 +37,11 @@ namespace PList2021
         private const byte kCFBinaryPlistMarkerDict = 0xD0;
 
         public static bool s_poolStrings = true;
+        
+        private enum NonStandardTopObject : long {
+            Last = -9223372036854775808,
+            First = 0
+        }
 
         private unsafe struct Trailer
         {
@@ -86,7 +91,7 @@ namespace PList2021
             }
         }
         
-        public static unsafe object? Parse(ReadOnlySpan<byte> data)
+        public static unsafe object? Parse(ReadOnlySpan<byte> data, NonStandardTopObject objectResolution = NonStandardTopObject.Last)
         {
             ValidateHeader(data);
 
@@ -97,6 +102,21 @@ namespace PList2021
                 plistTrailer.m_numObjects = BinaryPrimitives.ReverseEndianness(plistTrailer.m_numObjects);
                 plistTrailer.m_topObject = BinaryPrimitives.ReverseEndianness(plistTrailer.m_topObject);
                 plistTrailer.m_offsetTableOffset = BinaryPrimitives.ReverseEndianness(plistTrailer.m_offsetTableOffset);
+            }
+            
+            
+            if(plistTrailer.m_topObject >= plistTrailer.m_numObjects) {
+                switch (objectResolution) {      
+                    case NonStandardTopObject.Last:
+                        plistTrailer.m_topObject = plistTrailer.m_numObjects - 1;
+                        break; 
+                    case NonStandardTopObject.First:
+                        plistTrailer.m_topObject = 0;
+                        break;
+                    default:
+                        plistTrailer.m_topObject = ((long) objectResolution > 0) ? (ulong) objectResolution : (ulong) (plistTrailer.m_numObjects + (ulong) objectResolution);
+                        break;
+                }
             }
 
             return ReadNode(plistTrailer, data, plistTrailer.m_topObject);
@@ -201,7 +221,8 @@ namespace PList2021
                 }
                 case kCFBinaryPlistMarkerData:
                 {
-                    throw new NotImplementedException("kCFBinaryPlistMarkerData");
+                    var count = nodeTag.GetCount(ref nodeSpan);
+                    return nodeSpan.Slice(0, count).ToArray(); // Memory<byte>?
                 }
                 case kCFBinaryPlistMarkerASCIIString:
                 {
